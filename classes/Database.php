@@ -24,7 +24,7 @@ class Database
             ];
 
             if ($this->host !== 'localhost') {
-                $options[PDO::MYSQL_ATTR_SSL_CA] = true;
+                $options[PDO::MYSQL_ATTR_SSL_CA] = '/etc/ssl/certs/ca-certificates.crt';
             }
 
             $this->connection = new PDO(
