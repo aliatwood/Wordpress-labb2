@@ -47,4 +47,22 @@ class Bucketlist
             ':id' => $id
         ]);
     }
+
+    public function update($id, $name, $description, $priority)
+{
+    $sql = "UPDATE bucketlist_items
+            SET name = :name,
+                description = :description,
+                priority = :priority
+            WHERE id = :id";
+
+    $stmt = $this->conn->prepare($sql);
+
+    return $stmt->execute([
+        ':id' => $id,
+        ':name' => $name,
+        ':description' => $description,
+        ':priority' => $priority
+    ]);
+}
 }

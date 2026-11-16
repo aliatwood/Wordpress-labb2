@@ -1,3 +1,4 @@
+
 <?php
 
 require_once __DIR__ . '/config/config.php';
@@ -6,6 +7,7 @@ $errors = [];
 $name = '';
 $description = '';
 $priority = '';
+$editId = null;
 
 // Hantera formulär
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -25,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Lägg till en sak
+    // Lägg till eller uppdatera en sak
     else {
 
         $name = trim($_POST['name'] ?? '');
@@ -53,8 +55,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = "Prioriteten måste vara mellan 1 och 5.";
         }
 
-        // Spara i databasen om formuläret är korrekt
-        if (empty($errors)) {
+        // Uppdatera en befintlig sak
+        if (isset($_POST['update_id'])) {
+
+            $editId = filter_var($_POST['update_id'], FILTER_VALIDATE_INT);
+
+            if ($editId === false || $editId <= 0) {
+                $errors[] = "Ogiltigt ID.";
+            }
+
+            if (empty($errors)) {
+
+                $bucketlist->update(
+                    $editId,
+                    $name,
+                    $description,
+                    $priorityValue
+                );
+
+                header('Location: bucketlist.php?updated=1');
+                exit;
+            }
+        }
+
+        // Lägg till en ny sak
+        elseif (empty($errors)) {
 
             $bucketlist->add(
                 $name,
@@ -70,6 +95,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Hämta alla saker från databasen
 $items = $bucketlist->getAll();
+
+// Hämta information om saken som ska redigeras
+if (isset($_GET['edit_id'])) {
+
+    $editId = filter_var($_GET['edit_id'], FILTER_VALIDATE_INT);
+
+    if ($editId !== false && $editId > 0) {
+
+        foreach ($items as $item) {
+
+            if ((int)$item['id'] === $editId) {
+                $name = $item['name'];
+                $description = $item['description'];
+                $priority = $item['priority'];
+                break;
+            }
+        }
+
+        if ($name === '') {
+            $editId = null;
+            $errors[] = "Saken kunde inte hittas.";
+        }
+    } else {
+        $editId = null;
+        $errors[] = "Ogiltigt ID.";
+    }
+}
 
 ?>
 
@@ -100,19 +152,20 @@ $items = $bucketlist->getAll();
 
     <main>
 
-        <h2>Lägg till en sak</h2>
+        <h2><?= $editId ? 'Redigera en sak' : 'Lägg till en sak' ?></h2>
 
-        <!-- Meddelande när en sak lagts till -->
         <?php if (isset($_GET['added'])): ?>
             <p>Saken har lagts till i din bucketlist!</p>
         <?php endif; ?>
 
-        <!-- Meddelande när en sak raderats -->
         <?php if (isset($_GET['deleted'])): ?>
             <p>Saken har raderats från din bucketlist!</p>
         <?php endif; ?>
 
-        <!-- Visa eventuella felmeddelanden -->
+        <?php if (isset($_GET['updated'])): ?>
+            <p>Saken har uppdaterats!</p>
+        <?php endif; ?>
+
         <?php if (!empty($errors)): ?>
             <ul>
                 <?php foreach ($errors as $error): ?>
@@ -121,8 +174,16 @@ $items = $bucketlist->getAll();
             </ul>
         <?php endif; ?>
 
-        <!-- Formulär för att lägga till saker -->
+        <!-- Formulär för att lägga till eller redigera -->
         <form method="POST" action="bucketlist.php">
+
+            <?php if ($editId): ?>
+                <input
+                    type="hidden"
+                    name="update_id"
+                    value="<?= (int)$editId ?>"
+                >
+            <?php endif; ?>
 
             <label for="name">Namn:</label>
 
@@ -146,7 +207,9 @@ $items = $bucketlist->getAll();
             <label for="priority">Prioritet:</label>
 
             <select id="priority" name="priority" required>
-                <option value="" selected disabled>Välj prioritet</option>
+                <option value="" disabled <?= $priority === '' ? 'selected' : '' ?>>
+                    Välj prioritet
+                </option>
 
                 <?php for ($i = 1; $i <= 5; $i++): ?>
 
@@ -161,7 +224,13 @@ $items = $bucketlist->getAll();
 
             </select>
 
-            <button type="submit">Lägg till</button>
+            <button type="submit">
+                <?= $editId ? 'Spara ändringar' : 'Lägg till' ?>
+            </button>
+
+            <?php if ($editId): ?>
+                <a href="bucketlist.php">Avbryt redigering</a>
+            <?php endif; ?>
 
         </form>
 
@@ -196,7 +265,12 @@ $items = $bucketlist->getAll();
                         <?= htmlspecialchars($item['created_at']) ?>
                     </p>
 
-                    <!-- Formulär för att radera en sak -->
+                    <!-- Redigera en sak -->
+                    <a href="bucketlist.php?edit_id=<?= (int)$item['id'] ?>">
+                        Redigera
+                    </a>
+
+                    <!-- Radera en sak -->
                     <form method="POST" action="bucketlist.php">
 
                         <input
