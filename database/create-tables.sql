@@ -1,0 +1,11 @@
+CREATE DATABASE IF NOT EXISTS bucketlist;
+
+USE bucketlist;
+
+CREATE TABLE IF NOT EXISTS bucketlist_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    priority INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
