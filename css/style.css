@@ -137,6 +137,37 @@ button {
     transition: background-color 0.3s;
 }
 
+
+/* Redigera-länk */
+.edit-link {
+    display: inline-block;
+    background-color: #456b91;
+    color: white;
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 6px;
+    font-size: 15px;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.edit-link:hover {
+    background-color: #243b55;
+}
+
+/* Avbryt redigering */
+.cancel-link {
+    display: inline-block;
+    color: #456b91;
+    text-decoration: none;
+    margin-left: 12px;
+}
+
+.cancel-link:hover {
+    text-decoration: underline;
+}
+
+
 button:hover {
     background-color: #456b91;
 }

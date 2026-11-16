@@ -228,7 +228,7 @@ if (isset($_GET['edit_id'])) {
             </button>
 
             <?php if ($editId): ?>
-                <a href="bucketlist.php">Avbryt redigering</a>
+                <a class="cancel-link" href="bucketlist.php">Avbryt redigering</a>
             <?php endif; ?>
 
         </form>
@@ -265,7 +265,7 @@ if (isset($_GET['edit_id'])) {
                     </p>
 
                     <!-- Redigera en sak -->
-                    <a href="bucketlist.php?edit_id=<?= (int)$item['id'] ?>">
+                    <a class="edit-link" href="bucketlist.php?edit_id=<?= (int)$item['id'] ?>">
                         Redigera
                     </a>
 
