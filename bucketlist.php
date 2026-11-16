@@ -1,4 +1,3 @@
-
 <?php
 
 require_once __DIR__ . '/config/config.php';
@@ -6,7 +5,7 @@ require_once __DIR__ . '/config/config.php';
 $errors = [];
 $name = '';
 $description = '';
-$priority = '3';
+$priority = '';
 
 // Hantera formulär
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -147,6 +146,7 @@ $items = $bucketlist->getAll();
             <label for="priority">Prioritet:</label>
 
             <select id="priority" name="priority" required>
+                <option value="" selected disabled>Välj prioritet</option>
 
                 <?php for ($i = 1; $i <= 5; $i++): ?>
 
@@ -164,7 +164,6 @@ $items = $bucketlist->getAll();
             <button type="submit">Lägg till</button>
 
         </form>
-
 
         <!-- Visa alla saker i bucketlisten -->
         <h2>Mina saker</h2>
