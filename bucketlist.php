@@ -147,6 +147,7 @@ if (isset($_GET['edit_id'])) {
         <a href="index.php">Hem</a>
         <a href="bucketlist.php">Min Bucketlist</a>
         <a href="ai.php">AI & Utveckling</a>
+        <a href="om.php">Om projektet</a>
     </nav>
 
     <main>
