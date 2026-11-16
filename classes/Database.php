@@ -10,8 +10,6 @@ class Database
 
     public function __construct()
     {
-        // Lokala inställningar används med XAMPP.
-        // Render använder miljövariabler.
         $this->host = getenv('DB_HOST') ?: 'localhost';
         $this->dbname = getenv('DB_NAME') ?: 'bucketlist';
         $this->username = getenv('DB_USER') ?: 'root';
@@ -25,7 +23,6 @@ class Database
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ];
 
-            // TLS krävs för den externa databasen.
             if ($this->host !== 'localhost') {
                 $options[PDO::MYSQL_ATTR_SSL_CA] = true;
             }
@@ -40,6 +37,7 @@ class Database
             return $this->connection;
 
         } catch (PDOException $e) {
+            error_log("Databasfel: " . $e->getMessage());
             die("Databasanslutningen misslyckades.");
         }
     }
