@@ -115,11 +115,23 @@
 
             <p>
                 Under arbetet med laborationen har jag använt
-                AI som ett stöd för att förstå PHP-kod,
-                skapa funktioner och lösa problem som uppstått
-                under utvecklingen. Jag har arbetat steg för
-                steg och fått förklaringar till hur de olika
-                delarna av koden fungerar.
+                ChatGPT som ett omfattande stöd. AI har hjälpt
+                mig att skapa stora delar av koden, framför allt
+                PHP-koden, inklusive klasser, databasanslutning
+                och funktioner för att lägga till, visa och ta
+                bort aktiviteter. Jag har även fått hjälp med
+                HTML, felsökning och förklaringar av hur olika
+                delar fungerar.
+            </p>
+
+            <p>
+                Jag vill vara tydlig med att AI har skrivit
+                en stor del av koden, särskilt PHP-delen.
+                Mitt eget arbete har framför allt bestått av
+                att följa instruktioner steg för steg, skapa
+                projektets struktur, sätta upp databasen,
+                lägga in och testa koden samt förstå och
+                kontrollera hur funktionerna fungerar.
             </p>
 
             <p>
@@ -134,28 +146,31 @@
                 Under publiceringen uppstod problem med
                 databasanslutningen och SSL/TLS. Genom att
                 undersöka felmeddelanden och testa olika
-                lösningar kunde jag till slut få anslutningen
+                lösningar kunde vi till slut få anslutningen
                 att fungera. Det gav mig en bättre förståelse
                 för hur en webbserver kommunicerar med en
                 extern databas.
             </p>
 
             <p>
-                Jag har även lärt mig hur viktigt det är att
-                testa sin kod och läsa felmeddelanden för
-                att förstå vad som behöver åtgärdas. AI har
-                varit ett användbart hjälpmedel, särskilt
-                vid felsökning, men jag har också förstått
-                att man behöver kontrollera och testa
-                förslagen själv.
+                Jag har lärt mig mer om hur PHP fungerar
+                tillsammans med databaser, vad objektorienterad
+                programmering innebär och hur en webbplats
+                publiceras på en extern server. Jag har också
+                fått en bättre förståelse för hur viktigt det
+                är att testa kod och läsa felmeddelanden när
+                något inte fungerar.
             </p>
 
             <p>
-                Sammanfattningsvis har AI hjälpt mig att
-                komma vidare när jag fastnat, samtidigt
-                som arbetet har gett mig nya kunskaper om
-                PHP, databaser, serverkonfiguration och
-                publicering av webbplatser.
+                Min slutsats är att AI är ett väldigt
+                användbart hjälpmedel när man lär sig
+                programmering, särskilt när man behöver hjälp
+                att komma vidare eller förstå kod. Samtidigt
+                har arbetet visat mig att det är viktigt att
+                inte bara kopiera kod, utan att försöka förstå
+                vad den gör och själv kontrollera att den
+                fungerar.
             </p>
         </section>
 
