@@ -1,4 +1,4 @@
-# Bucketlist – Laboration 2
+# Laboration 2 - Introduktion till PHP
 
 ## Publicerad webbplats
 https://wordpress-labb2.onrender.com/
