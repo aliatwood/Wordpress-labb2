@@ -1,0 +1,15 @@
+# Lokala inställningar och lösenord
+.env
+.env.*
+!.env.example
+
+# Editorfiler
+.vscode/
+.idea/
+
+# Operativsystem
+.DS_Store
+Thumbs.db
+
+# Loggfiler
+*.log
